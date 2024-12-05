@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>autopark solution</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+
+
+    .main-header {
+      background-image: url('ruta-de-tu-imagen.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+  }
+
+  .main-sidebar {
+    background: url('/static/img/img6.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+
+.carousel-item img {
+  height: 70vh;
+  object-fit: cover;
+}
+.card-title {
+  font-weight: bold;
+}
+
+      /* Barra de navegación transparente y fija */
+      nav.barra {
+        background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semitransparente */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Línea de separación sutil */
+        position: fixed; /* Fija la barra en la parte superior */
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000; /* Asegura que la barra esté por encima de otros elementos */
+        width: 100%; /* Abarca todo el ancho de la pantalla */
+        height: 50px; /* Altura de la barra */
+        transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+      }
+      
+      /* Cambia el fondo al pasar el ratón */
+      nav.barra:hover {
+        background-color: rgba(0, 0, 0, 0.9); /* Oscurece al pasar el ratón */
+      }
+      
+      /* Estilos para los enlaces de la barra */
+      nav.barra .navbar-nav .nav-link {
+        color: white !important; /* Asegura que el texto sea blanco */
+      }
+      
+      /* Estilos para los iconos dentro de los enlaces */
+      nav.barra .navbar-nav .nav-link i {
+        color: white !important; /* Asegura que los iconos sean blancos */
+      }
+      
+      /* Estilos específicos para los enlaces cuando se pasa el ratón */
+      nav.barra .navbar-nav .nav-link:hover {
+        color: #137be2; /* Color de texto al pasar el ratón */
+      }
+      
+      /* Estilo para el logo de la aplicación (si se usa h5 u otros textos) */
+      nav.barra .navbar-nav .nav-item h5 {
+        color: white; /* Asegura que el texto del nombre sea blanco */
+      }
+      
+      /* Estilo para el menú hamburguesa en pantallas pequeñas */
+      nav.barra .navbar-nav .nav-item a[data-widget="pushmenu"] {
+        color: white; /* Asegura que el icono sea blanco */
+      }
+      
+      /* Estilos de los botones en el menú derecho */
+      nav.barra .navbar-nav.ml-auto .nav-item .nav-link {
+        color: white !important; /* Asegura que los botones sean de color blanco */
+      }
+      
+      /* Ajuste de los iconos en el menú */
+      nav.barra .navbar-nav.ml-auto .nav-item i {
+        color: white !important; /* Asegura que los iconos sean de color blanco */
+      }
+      
+      /* Estilo de la barra en pantallas pequeñas */
+      @media (max-width: 767px) {
+        nav.barra {
+            padding: 0 10px; /* Ajusta el espaciado en pantallas pequeñas */
+        }
+      }
+      
+  
+
+  </style>
+</head>
+<body  class="hold-transition sidebar-mini layout-fixed ">
+  <div class="wrapper " >
+
+    <!-- loading -->
+ <div class="preloader flex-column justify-content-center align-items-center">
+  <div class="preloader-animation">
+      <img src="static/img/logo.png" alt="AdminLTELogo" class="preloader-logo">
+      <div class="spinner"></div>
+  </div>
+</div>
+
+ <!-- Navbar -->
+ <nav class="main-header navbar navbar-expand navbar-success navbar-light barra" style="width: 80%; height: 50px;">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: rgb(246, 246, 246);"></i></a>
+    </li>
+    
+    <!-- Nombre del sistema (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" onclick="reporte()" class="nav-link" style="color: rgb(246, 246, 246);"><h5>Autopark Solution</h5></a>
+    </li>
+    
+    <!-- Botón de tareas -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" onclick="tareas()" class="nav-link" alt="Asignar Tareas" style="color: rgb(246, 246, 246);">
+        <i class="nav-icon fa-solid fa-square-plus"></i>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Navbar Right links (iconos y botones en la parte derecha) -->
+  <ul class="navbar-nav ml-auto">
+    <!-- Botón Menú Principal (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="index.html" class="nav-link btn-menu" alt="Menú Principal" style="color: white;">
+        Menú Principal
+      </a>
+    </li>
+
+    <!-- Botón Usuario (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" class="nav-link btn-usuario" alt="Usuario" style="color: rgb(246, 246, 246);">
+        
+      </a>
+    </li>
+
+    <!-- Botón Menú Principal (Icono, visible en pantallas pequeñas) -->
+    <li class="nav-item d-sm-none">
+      <a href="index.html" class="nav-link" alt="Menú Principal">
+        <i class="fa-solid fa-home" style="font-size: 20px; color: rgb(2, 2, 2);"></i>
+      </a>
+    </li>
+
+    <!-- Botón Usuario (Icono, visible en pantallas pequeñas) -->
+    <li class="nav-item">
+      <a href="#" class="nav-link" alt="administrativo">
+        <i class="fas fa-sign-out-alt"style="font-size: 20px; color: rgb(248, 16, 16);"></i></i>
+
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="height: 100%; position: fixed;">
+  <!-- Brand Logo -->
+  <a href="index.html" class="brand-link">
+    <img src="/static/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">MENU</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="static/img/usuari.png"  class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="perfiladmin.html" class="d-block">Perfil</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        
+        <!-- Visión general -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link active">
+            <i class="fas fa-tachometer-alt"></i>
+            <p>
+              Visión general
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          
+          <!-- Contenedor para el checkbox -->
+          <input type="checkbox" id="menu-toggle" class="menu-toggle" style="display: none;">
+          <label for="menu-toggle" class="nav-link">
+            <i class="right fas fa-angle-left"></i> <!-- Icono para alternar -->
+          </label>
+
+          <ul class="nav nav-treeview" id="submenu">
+            <li class="nav-item">
+              <a href="reservaadmin.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Reservas actuales y pasadas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="estadistica.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Estadísticas de ocupación tiempo real</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="ingresos.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Ingresos generados</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="alertas.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Alertas sobre las reservas o problemas técnicos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Gestión de reservas -->
+        <li class="nav-item">
+          <a href="gestionreserva.html" class="nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <p>Gestión de reservas <span class="right badge badge-danger">New</span></p>
+          </a>
+        </li>
+
+        <!-- Gestión de usuarios -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-users-cog"></i>
+            <p>
+              Gestión de usuarios
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="admistrarusuari.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Administrar usuarios</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="hisoreserva.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Historial de reservas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="gestionpago.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Gestión de pagos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Configuración -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-cogs"></i>
+            <p>
+              Configuración
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="actuaizartarifa.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Actualizar tarifas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="promociones.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Gestionar promociones</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Estadísticas y reportes -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-chart-line"></i>
+            <p>
+              Estadísticas y reportes
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="generareporte.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Generar reportes</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="actualizardatos.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Actualizar datos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Alertas y notificaciones -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>
+              Alertas y notificaciones
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="notifi.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Envío de notificación usuario</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="Alertasproblemas.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Alertas de problemas</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Seguridad -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-file-alt"></i>
+            <p>
+              Configuración y alertas
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="alertasvehiculos.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Alertas vehiculares</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-book"></i>
+            <p>
+              Configuración y alertas
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="accesoauditoria.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Auditoría de acceso</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Soportes y ayuda -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-question-circle"></i>
+            <p>
+              Soportes y ayuda
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="atencionalciente..html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Atención al cliente</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Mejora continua -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-history"></i>
+            <p>
+              Mejora continua
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="historicalperfo.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Historial de desempeño</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+
+
+<div>
+  <div class="content-wrapper" style="background-color: rgba(240, 237, 237, 0);">
+ 
+  
+
+  <!-- Carrusel -->
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" >
+      <div class="carousel-inner">
+          <div class="carousel-item active">
+              <img src="/static/img/bg.avif" class="d-block w-100" alt="Imagen 1">
+          </div>
+          <div class="carousel-item">
+              <img src="/static/img/lu.avif" class="d-block w-100" alt="Imagen 2">
+          </div>
+          <div class="carousel-item">
+              <img src="/static/img/jj.jpg" class="d-block w-100" alt="Imagen 3">
+          </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+      </button>
+  </div>
+
+  <!-- Contenido principal -->
+      <h2 class="text-center mb-4">Nuestros Servicios</h2>
+      <div class="row">
+          <div class="col-md-4">
+              <div class="card">
+                  <img src="/static/img/img15.jpg" class="card-img-top" alt="Registro Automático">
+                  <div class="card-body">
+                      <h5 class="card-title">Registro Automático</h5>
+                      <p class="card-text">Facilitamos la gestión de ingreso y salida con sistemas automatizados.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card">
+                  <img src="/static/img/img16.jpg" class="card-img-top" alt="Control de Tarifas" style="height: 230px;">
+                  <div class="card-body">
+                      <h5 class="card-title">Control de Tarifas</h5>
+                      <p class="card-text">Establece y administra tarifas dinámicas con precisión.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card">
+                  <img src="/static/img/img17.jpg" class="card-img-top" alt="Seguridad y Monitoreo">
+                  <div class="card-body">
+                      <h5 class="card-title">Seguridad y Monitoreo</h5>
+                      <p class="card-text">Contamos con cámaras y sistemas de vigilancia integrados.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Acordeón de detalles de servicios -->
+      <h2 class="text-center mb-4">Detalles de Servicios</h2>
+      <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Servicio de Reservas en Línea
+                  </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      Nuestro sistema permite a los usuarios reservar espacios con antelación, garantizando disponibilidad en momentos pico.
+                  </div>
+              </div>
+          </div>
+          <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Mantenimiento Preventivo
+                  </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      Ofrecemos mantenimiento preventivo para garantizar el funcionamiento óptimo de equipos y sistemas.
+                  </div>
+              </div>
+          </div>
+          <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Soporte Técnico 24/7
+                  </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                      Contamos con soporte técnico disponible las 24 horas para atender cualquier incidencia.
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Tarjetas explicativas adicionales -->
+      <h2 class="text-center mb-4">Características Destacadas</h2>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+              <div class="card h-100">
+                  <img src="/static/img/img18.jpg" class="card-img-top" alt="Interfaz Intuitiva">
+                  <div class="card-body">
+                      <h5 class="card-title">Interfaz Intuitiva</h5>
+                      <p class="card-text">Nuestra plataforma es fácil de usar, mejorando la experiencia del usuario.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100">
+                  <img src="/static/img/img19.jpg" class="card-img-top" alt="Pagos Digitales" style="height: 350px;">
+                  <div class="card-body">
+                      <h5 class="card-title">Pagos Digitales</h5>
+                      <p class="card-text">Aceptamos múltiples métodos de pago para mayor comodidad.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col">
+              <div class="card h-100">
+                  <img src="/static/img/img20.jpg" class="card-img-top" alt="Integración con App Móvil" style="height: 350px;">
+                  <div class="card-body">
+                      <h5 class="card-title">Integración con App Móvil</h5>
+                      <p class="card-text">Accede a nuestros servicios desde cualquier lugar con nuestra aplicación móvil.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Sección de estadísticas -->
+      <h2 class="text-center mb-4">Estadísticas</h2>
+      <div class="row">
+          <div class="col-md-4">
+              <div class="card text-center">
+                  <div class="card-body">
+                      <h5 class="card-title">Reservas Totales</h5>
+                      <p class="card-text">1500</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card text-center">
+                  <div class="card-body">
+                      <h5 class="card-title">Clientes Activos</h5>
+                      <p class="card-text">500</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card text-center">
+                  <div class="card-body">
+                      <h5 class="card-title">Satisfacción del Cliente</h5>
+                      <p class="card-text">98%</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Sección de testimonios -->
+      <h2 class="text-center mb-4">Testimonios</h2>
+      <div class="row">
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-body">
+                      <p class="card-text">"Autopark Solution ha transformado la forma en que gestionamos nuestro estacionamiento. ¡Altamente recomendado!"</p>
+                      <footer class="blockquote-footer">Juan Pérez</footer>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-body">
+                      <p class="card-text">"Excelente servicio y atención al cliente. La app es muy fácil de usar."</p>
+                      <footer class="blockquote-footer">María Gómez</footer>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="card">
+                  <div class="card-body">
+                      <p class="card-text">"Gran experiencia. La seguridad y el monitoreo son excepcionales."</p>
+                      <footer class="blockquote-footer">Carlos Ruiz</footer>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Sección de equipo -->
+      <h2 class="text-center mb-4">Nuestro Equipo</h2>
+      <div class="row">
+          <div class="col-md-3">
+              <div class="card">
+                  <img src="/static/img/img21.jpg" class="card-img-top" alt="Miembro del equipo">
+                  <div class="card-body">
+                      <h5 class="card-title">operario</h5>
+                      <p class="card-text">encargado de los protocols y labores del sector laboral</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <div class="card">
+                  <img src="/static/img/img22.jpg" class="card-img-top" alt="Miembro del equipo" style="height: 190px;">
+                  <div class="card-body">
+                      <h5 class="card-title">desarrolladores</h5>
+                      <p class="card-text">encargados de la herramienta web que facilita solucitar los servicios de ls usuarios</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <div class="card">
+                  <img src="/static/img/img23.jpg" class="card-img-top" alt="Miembro del equipo" style="height: 190px;">
+                  <div class="card-body">
+                      <h5 class="card-title">Luis angel peñaloza</h5>
+                      <p class="card-text">Gerente de Operaciones y software</p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+              <div class="card">
+                  <img src="/static/img/img24.jpg" class="card-img-top" alt="Miembro del equipo" style="height: 190px;">
+                  <div class="card-body">
+                      <h5 class="card-title">area de marketing</h5>
+                      <p class="card-text">Coordinadora de Marketing</p>
+                  </div>
+              </div>
+          </div
+      </div>
+      
+
+
+      <!-- Sección de preguntas frecuentes -->
+      <h2 class="text-center mb-4">Preguntas Frecuentes</h2>
+      <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+              <h2 class="accordion-header" id="faqHeadingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                      ¿Cómo puedo registrarme?
+                  </button>
+              </h2>
+              <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                      Puedes registrarte en nuestra plataforma mediante el formulario disponible en la página de inicio.
+                  </div>
+              </div>
+          </div>
+          <div class="accordion-item">
+              <h2 class="accordion-header" id="faqHeadingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                      ¿Qué métodos de pago aceptan?
+                  </button>
+              </h2>
+              <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                      Aceptamos tarjetas de crédito, débito y pagos a través de aplicaciones móviles.
+                  </div>
+              </div>
+          </div>
+          <div class="accordion-item">
+              <h2 class="accordion-header" id="faqHeadingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                      ¿Hay un servicio al cliente disponible?
+                  </button>
+              </h2>
+              <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                      Sí, ofrecemos soporte técnico 24/7 para resolver cualquier inconveniente.
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="container mt-5">
+        <!-- Formulario de contacto -->
+        <h2 class="text-center mb-4">Contáctanos</h2>
+        <form id="contactForm">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        
+  <footer class="bg-light text-center py-4">
+    <p>&copy; 2024 Autopark Solution. Todos los derechos reservados.</p>
+</footer>
+    </div>     
+</div>
+</div>
+<script src="/static/js/empleadoint.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+  
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+</body>
+</html>

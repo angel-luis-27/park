@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopark Solution</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+     <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('img/paaa.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 450px; /* Ajuste del ancho del formulario */
+        }
+
+        .container h2 {
+            text-align: center;
+        }
+
+        .tab {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tab button {
+            width: 48%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .tab button.active {
+            background-color: #0056b3;
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-container input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .form-container button:hover {
+            background-color: #218838;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            font-size: 24px;
+            margin: 0 10px;
+            color: #06522898; /* Color de los iconos */
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .menu-button {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .menu-button a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        
+            body {
+                    background: url('static/img/lu.avif') no-repeat center center fixed;
+                    background-size: cover;
+                    min-height: 100vh;
+                    font-family: 'Arial', sans-serif;
+                }
+                .container {
+                  background-color: rgba(255, 255, 255, 0.95);
+                  padding: 40px;
+                  border-radius: 10px;
+                  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+                  max-width: 800px;
+                  margin-top: 100px;
+        
+              }
+        
+              footer {
+                  margin-top: 20px;
+                  text-align: center;
+                  font-size: 0.9rem;
+                  color: #666;
+              }
+        
+              #factura {
+                  display: none;
+                  margin-top: 40px;
+                  padding: 20px;
+                  background-color: white;
+                  border: 1px solid #ccc;
+                  border-radius: 10px;
+              }
+        
+              .image-placeholder {
+                  width: 100%;
+                  height: 200px; /* Ajusta la altura según sea necesario */
+                  background-color: #f0f0f0; /* Color de fondo para la imagen */
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: 20px 0; /* Espacio superior e inferior */
+                  border: 2px dashed #007bff; /* Borde de la imagen */
+                  
+              }
+              .navbar {
+                  background-color:transparent;
+                  color: white;
+                  padding: 10px;
+                  border-radius: 5px;
+                  margin-bottom: 20px;
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  z-index: 1000;
+                  box-shadow: 0 4px 6px rgba(63, 63, 63, 0.1);
+              }
+          
+        
+        
+              
+              .navbar {
+                background-color:transparent;
+                padding: 10px 20px;
+                border-radius: 10px;
+            }
+        
+            
+        
+            
+        
+            .navbar-nav .nav-link:hover {
+                background-color: rgba(231, 12, 12, 0.7);
+                color: white;
+                border-radius: 24px;
+            }
+        
+        
+        /* Estilo para la sidebar */
+        .sidebar {
+          background-image: url('static/img/img6.jpg'); /* Ruta de tu imagen */
+          background-size: cover; /* La imagen cubre todo el área */
+          background-position: center; /* Centra la imagen */
+          background-repeat: no-repeat; /* Evita que la imagen se repita */
+        }
+        
+        /* Estilo de los menús desplegables */
+        .menu-toggle {
+          display: none; /* Oculta el checkbox */
+        }
+        
+        .nav-item .nav-treeview {
+          display: none; /* Oculta los submenús por defecto */
+        }
+        
+        .menu-toggle:checked + .nav-treeview {
+          display: block; /* Muestra el submenú cuando el checkbox está marcado */
+        }
+        
+        .nav-link {
+          cursor: pointer;
+        }
+        
+        .nav-item label {
+          display: block;
+          padding: 10px;
+          font-size: 16px;
+        }
+        
+        /* Transición para hacer más suave el despliegue y ocultamiento */
+        .nav-treeview {
+          transition: all 0.3s ease;
+        }
+        
+        
+        /* Estilo de los menús desplegables */
+        .menu-toggle {
+          display: none; /* Oculta el checkbox */
+        }
+        
+        .nav-item .nav-treeview {
+          display: none; /* Oculta los submenús por defecto */
+        }
+        
+        .menu-toggle:checked + .nav-treeview {
+          display: block; /* Muestra el submenú cuando el checkbox está marcado */
+        }
+        
+        .nav-link {
+          cursor: pointer;
+        }
+        
+        .nav-item label {
+          display: block;
+          padding: 10px;
+          font-size: 16px;
+        }
+        
+        /* Transición para hacer más suave el despliegue y ocultamiento */
+        .nav-treeview {
+          transition: all 0.3s ease;
+        }
+        
+        /* Estilo de los textos de la barra lateral */
+        .sidebar {
+          color: white; /* Cambia el color del texto de toda la sidebar */
+        }
+        
+        /* Cambia el color del texto de los links */
+        .sidebar .nav-link {
+          color: white; /* Letras blancas en los enlaces */
+        }
+        
+        /* Cambia el color del texto cuando el mouse está sobre un enlace */
+        .sidebar .nav-link:hover {
+          color: #f8f9fa; /* Puedes cambiar el color a uno más claro si prefieres */
+        }
+        
+        /* Cambia el color de los iconos en los enlaces */
+        .sidebar .nav-link i {
+          color: white; /* Iconos blancos */
+        }
+        
+        /* Cambia el color de los títulos del menú */
+        .sidebar .nav-header {
+          color: white; /* Letras blancas en los encabezados de las secciones */
+        }
+        
+        /* Cambiar el color de los badges (como las etiquetas que aparecen en algunos enlaces) */
+        .sidebar .badge {
+          background-color: #f00; /* Un color de fondo para los badges */
+          color: white; /* Letras blancas dentro de los badges */
+        }
+        
+        /* Color del texto en las subopciones del menú (los desplegables) */
+        .sidebar .nav-treeview .nav-link {
+          color: white; /* Letras blancas en las opciones de los submenús */
+        }
+        
+        /* Opcional: cambiar el color del texto en los títulos de los submenús */
+        .sidebar .nav-treeview > .nav-item > a {
+          color: white; /* Letras blancas en los títulos de las opciones dentro del submenú */
+        }
+        
+        /* Estilo del menú lateral */
+        .sidebar {
+          overflow-y: auto; /* Permite el desplazamiento vertical cuando el contenido se desborda */
+          height: 100vh; /* Asegura que el menú ocupe toda la altura de la ventana */
+          scrollbar-width: thin; /* Barra de desplazamiento más delgada en Firefox */
+          scrollbar-color: #ffffff #212529; /* Pulgar blanco con fondo oscuro */
+        }
+        
+        /* Estilo de la barra de desplazamiento en navegadores basados en Webkit (Chrome, Safari, etc.) */
+        .sidebar::-webkit-scrollbar {
+          width: 12px; /* Ancho de la barra de desplazamiento */
+        }
+        
+        /* Estilo del pulgar (parte movible) de la barra de desplazamiento */
+        .sidebar::-webkit-scrollbar-thumb {
+          background-color: #ffffff; /* Pulgar blanco */
+          border-radius: 10px; /* Bordes redondeados */
+          border: 3px solid #212529; /* Borde oscuro alrededor del pulgar */
+          transition: background-color 0.3s ease; /* Efecto de transición cuando cambia el color */
+        }
+        
+        /* Fondo de la barra de desplazamiento */
+        .sidebar::-webkit-scrollbar-track {
+          background: #212529; /* Fondo oscuro para la barra */
+          border-radius: 10px; /* Bordes redondeados para el fondo */
+        }
+        
+        /* Estilo cuando el pulgar de la barra de desplazamiento es tocado (hover) */
+        .sidebar::-webkit-scrollbar-thumb:hover {
+          background-color: #f8f9fa; /* Pulgar blanco más claro cuando se pasa el mouse */
+        }
+        
+        
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Barra de navegación con fondo transparente */
+        .barra {
+            background-color: transparent;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Estilos para los elementos de la barra de navegación */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        /* Separación entre los elementos del menú */
+        nav ul li {
+            margin-right: 15px;
+        }
+        
+        /* Estilos para los enlaces */
+        nav ul li a {
+            text-decoration: none;
+            color: #f8f2f2; /* Color blanco */
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Estilo específico para el botón de "Menú Principal" */
+        nav ul li .btn-menu {
+            border-radius: 5px;
+        }
+        
+        nav ul li .btn-menu:hover {
+            background-color: rgb(170, 24, 24);
+            color: white;
+        }
+        
+        /* Estilo específico para el botón de "Usuario" */
+        nav ul li .btn-usuario {
+            border-radius: 5px;
+        }
+        
+        nav ul li .btn-usuario:hover {
+            background-color: rgb(140, 28, 28);
+            color: white;
+        }
+        
+        /* Espacio entre el icono y el texto */
+        nav ul li a i {
+            margin-right: 20px;
+        }
+        
+        @media (max-width: 1024px) {
+          .container {
+              padding: 30px; /* Ajusta el padding para pantallas más pequeñas */
+              margin-top: 50px; /* Menos espacio arriba en pantallas pequeñas */
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .container {
+              padding: 20px; /* Menos padding para pantallas medianas */
+              margin-top: 30px; /* Menos espacio arriba */
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .container {
+              padding: 15px; /* Aún menos padding en pantallas pequeñas */
+              margin-top: 20px; /* Menos espacio en pantallas móviles */
+              max-width: 85%; /* Asegura que el contenedor ocupe todo el ancho */
+          }
+        }
+        
+        
+        
+        body {
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 900px; /* Max width para el formulario */
+            margin-top: 80px; /* Espacio superior por defecto */
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+        
+        .form-control {
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-label {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            font-size: 1.1rem;
+            padding: 12px;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        footer {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 30px;
+        }
+        
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25);
+        }
+        
+        .mb-3 {
+            margin-bottom: 20px;
+        }
+        
+        .notification {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        /* Estilos responsive */
+        @media (max-width: 768px) {
+            .container {
+                margin-top: 120px; /* Más espacio en dispositivos móviles */
+            }
+        
+            h2 {
+                font-size: 1.5rem; /* Ajustar tamaño del encabezado en pantallas pequeñas */
+            }
+        
+            .btn-secondary {
+                font-size: 1rem; /* Ajustar tamaño del botón en pantallas pequeñas */
+            }
+        }
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            /* Estilos para el contenedor principal */
+            .container {
+                width: 180%; /* Ajusta el ancho al 90% del ancho de la pantalla */
+                max-width: 1000px; /* Limita el tamaño máximo del contenedor en pantallas grandes */
+                margin: 20px auto; /* Centra el contenedor y agrega espacio vertical */
+                padding: 20px;
+                background-color: #fff; /* Fondo blanco */
+                border-radius: 10px; /* Bordes redondeados */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+                box-sizing: border-box; /* Incluye padding y border en las dimensiones */
+                height: 100%; /* Asegura que el contenedor ocupe toda la altura de la ventana */
+            }
+        
+            /* Estilo de los botones de las pestañas */
+            .tab button {
+                width: 48%; /* Ocupa casi la mitad del ancho */
+                padding: 10px;
+                margin: 5px 1%; /* Espacio entre botones */
+                border: none;
+                border-radius: 5px;
+                background-color: #007bff;
+                color: #fff;
+                cursor: pointer;
+                font-size: 1rem;
+                text-align: center;
+            }
+        
+            .tab button.active {
+                background-color: #0056b3;
+            }
+        
+            .tab button:hover {
+                background-color: #0056b3;
+            }
+        
+            /* Formularios */
+            .form-container {
+                display: none; /* Oculta inicialmente los formularios */
+            }
+        
+            .form-container.active {
+                display: block; /* Muestra el formulario activo */
+            }
+        
+            label {
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+        
+            input[type="text"], 
+            input[type="email"], 
+            input[type="password"] {
+                width: 100%; /* Acomoda al ancho del contenedor */
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+        
+            input:focus {
+                border-color: #007bff;
+                outline: none;
+            }
+        
+            button[type="submit"] {
+                width: 100%; /* Ocupa todo el ancho del contenedor */
+                padding: 10px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                font-size: 1rem;
+                cursor: pointer;
+            }
+        
+            button[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+        
+            /* Responsivo para pantallas pequeñas */
+            @media (max-width: 768px) {
+                .container {
+                    padding: 15px;
+                    max-width: 100%;
+                    width: 100%;
+
+                    margin: 20px auto; /* Centra el contenedor y agrega espacio vertical */
+                    padding: 20px;
+                    background-color: #fff; /* Fondo blanco */
+                    border-radius: 10px; /* Bordes redondeados */
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+                    box-sizing: border-box; /* Incluye padding y border en las dimensiones */
+                    height: 100%; /* Asegura que el contenedor ocupe toda la altura de la ventana */
+                }
+        
+                .tab button {
+                    font-size: 0.9rem;
+                }
+            }
+        
+        
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed navbar-warning">
+  <div class="wrapper >
+
+    <!-- loading -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      
+  
+  
+
+        <div class="container"><br><br><br><br><br><br><br><br>
+            <h2>Bienvenido</h2>
+            <div class="tab">
+                <button id="registroTab" class="active" onclick="mostrarFormulario('registro')">Registro</button>
+                <button id="loginTab" onclick="mostrarFormulario('login')">Inicio de Sesión</button>
+            </div>
+    
+            <!-- Formulario de Registro -->
+            <div id="registro" class="form-container active">
+                <form action="/registro" method="POST">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+    
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="email" id="correo" name="correo" required>
+    
+                    <label for="usuario">Nombre de Usuario</label>
+                    <input type="text" id="usuario" name="usuario" required>
+    
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" name="contraseña" required>
+    
+                    <label for="confirmar-contraseña">Confirmar Contraseña</label>
+                    <input type="password" id="confirmar-contraseña" name="confirmar-contraseña" required>
+    
+                    <button type="submit">Registrar</button>
+                </form>
+    
+                <div class="menu-button">
+                    <a href="index.html">Volver al Menú Principal</a>
+                </div>
+            </div>
+    
+            <!-- Formulario de Inicio de Sesión -->
+            <div id="login" class="form-container">
+                <form action="/login" method="POST">
+                    <label for="usuarioLogin">Nombre de Usuario</label>
+                    <input type="text" id="usuarioLogin" name="usuario" required>
+    
+                    <label for="contraseñaLogin">Contraseña</label>
+                    <input type="password" id="contraseñaLogin" name="contraseña" required>
+    
+                    <button type="submit">Iniciar Sesión</button>
+                </form>
+    
+                <div class="social-login">
+                    <i class="fab fa-google social-icon" title="Iniciar sesión con Google"></i>
+                    <i class="fab fa-whatsapp social-icon" title="Iniciar sesión con WhatsApp"></i>
+                    <i class="fas fa-mobile-alt social-icon" title="Iniciar sesión con Teléfono"></i>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            function mostrarFormulario(formulario) {
+                document.querySelectorAll('.form-container').forEach(container => {
+                    container.classList.remove('active');
+                });
+                document.getElementById(formulario).classList.add('active');
+    
+                document.querySelectorAll('.tab button').forEach(button => {
+                    button.classList.remove('active');
+                });
+                document.getElementById(`${formulario}Tab`).classList.add('active');
+            }
+        </script>
+    </div>
+
+
+
+          
+    <script>
+        function mostrarFormulario(formulario) {
+            // Ocultar todos los formularios
+            document.getElementById('registro').classList.remove('active');
+            document.getElementById('login').classList.remove('active');
+
+            // Mostrar el formulario seleccionado
+            document.getElementById(formulario).classList.add('active');
+
+            // Cambiar la clase de los botones
+            document.getElementById('registroTab').classList.remove('active');
+            document.getElementById('loginTab').classList.remove('active');
+
+            if (formulario === 'registro') {
+                document.getElementById('registroTab').classList.add('active');
+            } else {
+                document.getElementById('loginTab').classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>

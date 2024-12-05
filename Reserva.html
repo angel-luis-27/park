@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autopark Solution</title>
+  <script src="proceso.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  
+
+  <link rel="icon" href="dist/img/logodomestico.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    body {
+            background: url('static/img/lu.avif') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+          background-color: rgba(255, 255, 255, 0.95);
+          padding: 40px;
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+          max-width: 800px;
+          margin-top: 100px;
+
+      }
+
+      footer {
+          margin-top: 20px;
+          text-align: center;
+          font-size: 0.9rem;
+          color: #666;
+      }
+
+      #factura {
+          display: none;
+          margin-top: 40px;
+          padding: 20px;
+          background-color: white;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+      }
+
+      .image-placeholder {
+          width: 100%;
+          height: 200px; /* Ajusta la altura según sea necesario */
+          background-color: #f0f0f0; /* Color de fondo para la imagen */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 20px 0; /* Espacio superior e inferior */
+          border: 2px dashed #007bff; /* Borde de la imagen */
+          
+      }
+      .navbar {
+          background-color:transparent;
+          color: white;
+          padding: 10px;
+          border-radius: 5px;
+          margin-bottom: 20px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 1000;
+          box-shadow: 0 4px 6px rgba(63, 63, 63, 0.1);
+      }
+       .navbar-brand img {
+          height: 40px;
+          margin-right: 10px;
+          border-radius: 30px;
+      }
+
+/* Estilo para la sidebar */
+.sidebar {
+  background-image: url('static/img/img6.jpg'); /* Ruta de tu imagen */
+  background-size: cover; /* La imagen cubre todo el área */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+/* Estilo de los menús desplegables */
+.menu-toggle {
+  display: none; /* Oculta el checkbox */
+}
+
+.nav-item .nav-treeview {
+  display: none; /* Oculta los submenús por defecto */
+}
+
+.menu-toggle:checked + .nav-treeview {
+  display: block; /* Muestra el submenú cuando el checkbox está marcado */
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-item label {
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Transición para hacer más suave el despliegue y ocultamiento */
+.nav-treeview {
+  transition: all 0.3s ease;
+}
+
+
+/* Estilo de los menús desplegables */
+.menu-toggle {
+  display: none; /* Oculta el checkbox */
+}
+
+.nav-item .nav-treeview {
+  display: none; /* Oculta los submenús por defecto */
+}
+
+.menu-toggle:checked + .nav-treeview {
+  display: block; /* Muestra el submenú cuando el checkbox está marcado */
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-item label {
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Transición para hacer más suave el despliegue y ocultamiento */
+.nav-treeview {
+  transition: all 0.3s ease;
+}
+
+/* Estilo de los textos de la barra lateral */
+.sidebar {
+  color: white; /* Cambia el color del texto de toda la sidebar */
+}
+
+/* Cambia el color del texto de los links */
+.sidebar .nav-link {
+  color: white; /* Letras blancas en los enlaces */
+}
+
+/* Cambia el color del texto cuando el mouse está sobre un enlace */
+.sidebar .nav-link:hover {
+  color: #f8f9fa; /* Puedes cambiar el color a uno más claro si prefieres */
+}
+
+/* Cambia el color de los iconos en los enlaces */
+.sidebar .nav-link i {
+  color: white; /* Iconos blancos */
+}
+
+/* Cambia el color de los títulos del menú */
+.sidebar .nav-header {
+  color: white; /* Letras blancas en los encabezados de las secciones */
+}
+
+/* Cambiar el color de los badges (como las etiquetas que aparecen en algunos enlaces) */
+.sidebar .badge {
+  background-color: #f00; /* Un color de fondo para los badges */
+  color: white; /* Letras blancas dentro de los badges */
+}
+
+/* Color del texto en las subopciones del menú (los desplegables) */
+.sidebar .nav-treeview .nav-link {
+  color: white; /* Letras blancas en las opciones de los submenús */
+}
+
+/* Opcional: cambiar el color del texto en los títulos de los submenús */
+.sidebar .nav-treeview > .nav-item > a {
+  color: white; /* Letras blancas en los títulos de las opciones dentro del submenú */
+}
+
+/* Estilo del menú lateral */
+.sidebar {
+  overflow-y: auto; /* Permite el desplazamiento vertical cuando el contenido se desborda */
+  height: 100vh; /* Asegura que el menú ocupe toda la altura de la ventana */
+  scrollbar-width: thin; /* Barra de desplazamiento más delgada en Firefox */
+  scrollbar-color: #ffffff #212529; /* Pulgar blanco con fondo oscuro */
+}
+
+/* Estilo de la barra de desplazamiento en navegadores basados en Webkit (Chrome, Safari, etc.) */
+.sidebar::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilo del pulgar (parte movible) de la barra de desplazamiento */
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Pulgar blanco */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 3px solid #212529; /* Borde oscuro alrededor del pulgar */
+  transition: background-color 0.3s ease; /* Efecto de transición cuando cambia el color */
+}
+
+/* Fondo de la barra de desplazamiento */
+.sidebar::-webkit-scrollbar-track {
+  background: #212529; /* Fondo oscuro para la barra */
+  border-radius: 10px; /* Bordes redondeados para el fondo */
+}
+
+/* Estilo cuando el pulgar de la barra de desplazamiento es tocado (hover) */
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: #f8f9fa; /* Pulgar blanco más claro cuando se pasa el mouse */
+}
+
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Barra de navegación con fondo transparente */
+.barra {
+    background-color: transparent;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los elementos de la barra de navegación */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Separación entre los elementos del menú */
+nav ul li {
+    margin-right: 15px;
+}
+
+/* Estilos para los enlaces */
+nav ul li a {
+    text-decoration: none;
+    color: #f8f2f2; /* Color blanco */
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilo específico para el botón de "Menú Principal" */
+nav ul li .btn-menu {
+    border-radius: 5px;
+}
+
+nav ul li .btn-menu:hover {
+    background-color: rgb(170, 24, 24);
+    color: white;
+}
+
+/* Estilo específico para el botón de "Usuario" */
+nav ul li .btn-usuario {
+    border-radius: 5px;
+}
+
+nav ul li .btn-usuario:hover {
+    background-color: rgb(140, 28, 28);
+    color: white;
+}
+
+/* Espacio entre el icono y el texto */
+nav ul li a i {
+    margin-right: 20px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+      padding: 30px; /* Ajusta el padding para pantallas más pequeñas */
+      margin-top: 50px; /* Menos espacio arriba en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+      padding: 20px; /* Menos padding para pantallas medianas */
+      margin-top: 30px; /* Menos espacio arriba */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+      padding: 15px; /* Aún menos padding en pantallas pequeñas */
+      margin-top: 20px; /* Menos espacio en pantallas móviles */
+      max-width: 85%; /* Asegura que el contenedor ocupe todo el ancho */
+  }
+}
+
+        
+  </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed navbar-warning">
+<div class="wrapper ">
+
+  <!-- loading -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <div class="preloader-animation">
+        <img src="static/img/logo.png" alt="AdminLTELogo" class="preloader-logo">
+        <div class="spinner"></div>
+    </div>
+</div>
+
+
+  <!-- Navbar -->
+  <!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-success navbar-light barra" style="width: 80%; height: 50px;">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: rgb(246, 246, 246);"></i></a>
+    </li>
+    
+    <!-- Nombre del sistema (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" onclick="reporte()" class="nav-link" style="color: rgb(246, 246, 246);"><h5>Autopark Solution</h5></a>
+    </li>
+    
+    <!-- Botón de tareas -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" onclick="tareas()" class="nav-link" alt="Asignar Tareas" style="color: rgb(246, 246, 246);">
+        <i class="nav-icon fa-solid fa-square-plus"></i>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Navbar Right links (iconos y botones en la parte derecha) -->
+  <ul class="navbar-nav ml-auto">
+    <!-- Botón Menú Principal (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="index.html" class="nav-link btn-menu" alt="Menú Principal" style="color: white;">
+        Menú Principal
+      </a>
+    </li>
+
+    <!-- Botón Usuario (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="usuarioint.html" class="nav-link btn-usuario" alt="Usuario" style="color: rgb(246, 246, 246);">
+        Usuario
+      </a>
+    </li>
+
+    <!-- Botón Menú Principal (Icono, visible en pantallas pequeñas) -->
+    <li class="nav-item d-sm-none">
+      <a href="index.html" class="nav-link" alt="Menú Principal">
+        <i class="fa-solid fa-home" style="font-size: 20px; color: rgb(0, 0, 0);"></i>
+      </a>
+    </li>
+
+    <!-- Botón Usuario (Icono, visible en pantallas pequeñas) -->
+    <li class="nav-item d-sm-none">
+      <a href="usuarioint.html" class="nav-link" alt="Usuario">
+        <i class="fa-solid fa-user" style="font-size: 20px; color: rgb(240, 3, 3);"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->  
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-link">
+      <img src="static/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3 navbar-warning" style="opacity: .8">
+      <span class="brand-text font-weight-light">MENU</span>
+    </a>
+  
+    <!-- Sidebar -->
+    <div class="sidebar navbar-success" >
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="static/img/usuari.png" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="perfilusuario.html" class="d-block">Perfil</a>
+        </div>
+      </div>
+  
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Reservas -->
+          <li class="nav-item has-treeview">
+            <label class="nav-link" for="reservas-toggle">
+              <i class="fas fa-calendar-check"></i>
+              <p>Reservas<i class="right fas fa-angle-left"></i></p>
+            </label>
+            <input type="checkbox" id="reservas-toggle" class="menu-toggle">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="reserva.html" class="nav-link"><i class="fas fa-check"></i><p>Confirmar reserva</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="cancelarreserva.html" class="nav-link"><i class="fas fa-check"></i><p>Cancelar reserva</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="modireserva.html" class="nav-link"><i class="fas fa-check"></i><p>Modificar reserva</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="verreservas.html" class="nav-link"><i class="fas fa-check"></i><p>Ver reservas actuales</p></a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- Historial de pago -->
+          <li class="nav-item has-treeview">
+            <label class="nav-link" for="pago-toggle">
+              <i class="fas fa-receipt"></i>
+              <p>Historial de pago<i class="right fas fa-angle-left"></i></p>
+            </label>
+            <input type="checkbox" id="pago-toggle" class="menu-toggle">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="reembolso.html" class="nav-link"><i class="fas fa-check"></i><p>Solicitar reembolso</p></a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- Método de pago -->
+          <li class="nav-item has-treeview">
+            <label class="nav-link" for="pago-method-toggle">
+              <i class="fas fa-credit-card"></i>
+              <p>Método de pago<i class="fas fa-angle-left right"></i></p>
+            </label>
+            <input type="checkbox" id="pago-method-toggle" class="menu-toggle">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="agrgarpago.html" class="nav-link"><i class="fas fa-check"></i><p>Agregar método de pago</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="eliminarpago.html" class="nav-link"><i class="fas fa-check"></i><p>Eliminar método de pago</p></a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- Historial de reservas -->
+          <li class="nav-item has-treeview">
+            <label class="nav-link" for="historial-reservas-toggle">
+              <i class="fas fa-history"></i>
+              <p>Historial de reservas<i class="fas fa-angle-left right"></i></p>
+            </label>
+            <input type="checkbox" id="historial-reservas-toggle" class="menu-toggle">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="historialdereserava.html" class="nav-link"><i class="fas fa-check"></i><p>Ver detalles de reserva</p></a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- Notificaciones -->
+          <li class="nav-item has-treeview">
+            <label class="nav-link" for="notificaciones-toggle">
+              <i class="fas fa-bell"></i>
+              <p>Notificaciones<i class="fas fa-angle-left right"></i></p>
+            </label>
+            <input type="checkbox" id="notificaciones-toggle" class="menu-toggle">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/tables/simple.html" class="nav-link"><i class="fas fa-check"></i><p>Marcar como no leído</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/tables/data.html" class="nav-link"><i class="fas fa-check"></i><p>Configurar recordatorio</p></a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- Soporte -->
+          <li class="nav-item has-treeview">
+            <label class="nav-link" for="soporte-toggle">
+              <i class="fas fa-headset"></i>
+              <p>Soporte<i class="fas fa-angle-left right"></i></p>
+            </label>
+            <input type="checkbox" id="soporte-toggle" class="menu-toggle">
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="soporte.html" class="nav-link"><i class="fas fa-check"></i><p>Ver preguntas frecuentes</p></a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+  
+
+  <!-- Content Wrapper. Contains page content -->
+  <<div class="content-wrapper" style="background-color: rgba(240, 237, 237, 0);">
+    <div class="container" >
+        <h2 class="text-center mb-4">Reserva de Estacionamiento</h2>
+
+        <form id="reservaForm">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nombre" class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="placa" class="form-label">Placa del Vehículo</label>
+                    <input type="text" class="form-control" id="placa" name="placa" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="modelo" class="form-label">Modelo</label>
+                    <input type="text" class="form-control" id="modelo" name="modelo" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="color" class="form-label">Color</label>
+                    <input type="text" class="form-control" id="color" name="color" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="fecha" class="form-label">Fecha de Ingreso</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="hora" class="form-label">Hora de Ingreso</label>
+                    <input type="time" class="form-control" id="hora" name="hora" required>
+                </div>
+
+                <!-- Campo de Tiempo Reservado -->
+                <div class="col-md-6 mb-3">
+                    <label for="tiempo-reservado">Tiempo Reservado (horas):</label>
+                    <input type="number" id="tiempo-reservado" name="tiempo-reservado" class="form-control" style="width: 100%;" required>
+                </div>
+
+                <!-- Precio por Hora debajo del Tiempo Reservado -->
+                <div class="col-md-6 mb-3">
+                    <div id="precio-hora">
+                        <strong>Precio por Hora:</strong> $10,000 COP
+                    </div>
+                </div>
+
+                <!-- Campo de Número de Estacionamiento más largo -->
+                <div class="col-md-12 mb-3">
+                    <label for="estacionamiento" class="form-label">Número de Estacionamiento</label>
+                    <select class="form-select" id="estacionamiento" name="estacionamiento" required style="width: 100%; padding: 10px; font-size: 16px;">
+                        <option value="" disabled selected>Selecciona el número</option>
+                        <option value="1">Estacionamiento 1</option>
+                        <option value="2">Estacionamiento 2</option>
+                        <option value="3">Estacionamiento 3</option>
+                        <option value="4">Estacionamiento 4</option>
+                        <option value="5">Estacionamiento 5</option>
+                        <option value="6">Estacionamiento 6</option>
+                        <option value="7">Estacionamiento 7</option>
+                        <option value="8">Estacionamiento 8</option>
+                        <option value="9">Estacionamiento 9</option>
+                        <option value="10">Estacionamiento 10</option>
+                        <option value="11">Estacionamiento 11</option>
+                        <option value="12">Estacionamiento 12</option>
+                        <option value="13">Estacionamiento 13</option>
+                        <option value="14">Estacionamiento 14</option>
+                        <option value="15">Estacionamiento 15</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Confirmar Reserva</button><br><br>
+        </form>
+
+        <div class="text-center">
+            <img class="factura_img img-fluid" src="static/img/factura.jpg" alt="Factura de Reserva">
+        </div><br><br>
+
+        <p>
+            Este proceso de reserva de estacionamiento es rápido y sencillo. Una vez que complete el formulario con sus datos personales y los detalles de su vehículo, recibirá una factura de reserva con toda la información necesaria para su ingreso. La factura incluye su nombre, teléfono, placa del vehículo, modelo, color, fecha y hora de ingreso, así como el número de estacionamiento asignado. Además, podrá descargar esta factura en formato PDF para su conveniencia.
+        </p>
+
+        <div id="factura">
+            <h3 class="text-center">Factura de Reserva</h3>
+            <div id="facturaContenido"></div>
+            <button id="descargarPDF" class="btn btn-primary mt-3">Descargar Factura en PDF</button>
+        </div>
+
+        <footer>
+            © 2024 Autopark Solution. Todos los derechos reservados.
+        </footer>
+    </div>
+</div>
+
+    
+  </div>
+<script src="static/js/Reserva.js"></script>
+          
+  <!-- /.content-wrapper -->
+<script></script>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+</body>
+</html>

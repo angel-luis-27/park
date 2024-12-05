@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopark Solution</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<!-- Bootstrap JS Bundle (incluye Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+    <!-- Custom CSS -->
+    <style>
+        /* Navbar transparente */
+        /* Barra de navegación */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* Hero Section Styling */
+        .hero-section {
+            background-image: url('/static/img/img7.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+            margin-top: -60px;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .hero-section p {
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+            color: white;
+            margin-top: 10px;
+        }
+
+        /* Features Section */
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .feature-icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Sección de cartas de servicios */
+        .service-card {
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            min-height: 250px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .service-card h5 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        /* Sección de testimonios */
+        .testimonials {
+            background-color: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        .testimonial-card {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
+
+        footer .footer-contact {
+            margin-bottom: 20px;
+        }
+
+        footer .footer-contact p,
+        footer .footer-contact a {
+            margin: 0;
+        }
+
+        footer .social-links a {
+            color: white;
+            margin: 0 10px;
+        }
+
+        /* Estilo para párrafos con imagen */
+        .service-description {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .service-description img {
+            width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+
+        .service-description div {
+            flex: 1;
+        }
+
+/* Estilos generales */
+.navbar {
+  padding: 10px 20px;
+}
+
+/* Logo ajustado en dispositivos pequeños */
+@media (max-width: 767px) {
+  #logo {
+      height: 40px; /* Ajustar la altura para que el logo se vea bien en móviles */
+      width: auto;  /* Mantener las proporciones originales del logo */
+  }
+
+  .navbar-brand {
+      display: none; /* Ocultar el texto de la marca si el logo está presente */
+  }
+
+  /* Reducir el tamaño del texto en la cabecera */
+  .navbar-toggler {
+      padding: 5px;  /* Reducir tamaño del botón de la hamburguesa */
+  }
+}
+
+/* Estilos para pantallas medianas y grandes */
+@media (min-width: 768px) {
+  #logo {
+      height: 50px; /* Logo un poco más grande en pantallas más grandes */
+  }
+
+  .navbar-brand {
+      display: block; /* Mostrar el texto de la marca en pantallas grandes */
+  }
+}
+
+/* Menú desplegable ajustado */
+@media (max-width: 767px) {
+  .navbar-collapse {
+      background-color: #343a40; /* Fijar un color de fondo para el menú desplegable */
+      top: 60px; /* Asegura que el menú no quede encima del logo */
+      width: 90%;
+      left: 0;
+      display: none; /* Ocultar menú por defecto */
+      position: absolute;
+      z-index: 999;
+      overflow-y: auto;
+      max-height: calc(100vh - 60px);
+      scrollbar-width: thin; /* Barra de desplazamiento más delgada en Firefox */
+      scrollbar-color: #ffffff #212529; /* Pulgar blanco con fondo oscuro */
+
+  }
+
+  .navbar-collapse.show {
+      display: block; /* Mostrar el menú cuando está activo */
+  }
+
+  .navbar-nav {
+      flex-direction: column; /* Asegura que los elementos de menú estén en columna */
+      width: 100%;
+  }
+
+  .nav-link {
+      padding: 10px 20px;
+      text-align: left;
+      width: 100%;
+  }
+}
+
+/* Ajustes generales para el logo */
+#logo {
+    max-height: 50px; /* Limita el tamaño máximo del logo */
+}
+
+/* Alineación de íconos y textos */
+.nav-item .nav-link {
+    display: flex;
+    align-items: center; /* Alinea íconos y textos verticalmente */
+}
+
+.nav-item .nav-link i {
+    margin-right: 5px; /* Espacio entre ícono y texto */
+}
+
+/* Estilos específicos para pantallas pequeñas */
+@media (max-width: 768px) {
+    #logo {
+        max-height: 40px; /* Ajusta el tamaño del logo para móviles */
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Menú en columna */
+        align-items: flex-start; /* Alinea los elementos al inicio */
+        
+
+    }
+
+    .nav-item {
+        margin-bottom: 10px; /* Espacio entre los elementos del menú */
+
+
+    }
+}
+
+/* Estilos específicos para pantallas grandes */
+@media (min-width: 769px) {
+    .navbar-nav {
+        flex-direction: row; /* Menú en fila */
+        align-items: center; /* Alinea los elementos verticalmente */
+        
+    }
+
+    .nav-item {
+        margin-bottom: 0; /* Sin espacio extra entre elementos */
+    }
+}
+
+
+
+
+        
+        
+    </style>
+</head>
+
+<body>
+<!-- Header / Navbar -->
+<header class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <!-- Logo -->
+        <img src="/static/img/logo.png" alt="Autopark Logo" class="brand-image" id="logo" style="border-radius: 15px;">
+        
+        <!-- Nombre de la marca (solo visible en pantallas grandes) -->
+        <a class="navbar-brand d-none d-lg-block" href="#">Autopark Solution</a>
+  
+        <!-- Botón hamburguesa (toggler) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <!-- Menú de navegación -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#hero" class="nav-link-smooth">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services" class="nav-link-smooth">Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#testimonials" class="nav-link-smooth">Testimonios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact" class="nav-link-smooth">Contacto</a>
+                </li>
+                <!-- Botones de secciones -->
+                <li class="nav-item d-flex align-items-center">
+                    <!-- Botón de usuario -->
+                    <a class="nav-link" href="usuario.html" title="Sección Usuario" style="color: rgb(197, 11, 11);">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <!-- Botón administrativo -->
+                    <a class="nav-link" href="empleado.html" title="Sección Administrativa" style="color: rgb(11, 14, 218); margin-left: 5px;">
+                        <i class="fas fa-user-shield"></i>
+                    </a>
+                </li>
+                
+                <!-- Botón Administrativo -->
+                <a class="nav-link" href="emplieadoint.html" title="Sección Administrativa" style="color: rgb(253, 187, 45); margin-left: 10px;">
+                    <i class="fas fa-user-tie"></i> <!-- Ícono formal con corbata -->
+                </a>
+                
+                <!-- Botón Usuario -->
+                    <a class="nav-link" href="usuarioint.html" title="Sección Usuario" style="color: rgb(34, 193, 195);">
+                        <i class="fas fa-user-circle"></i> <!-- Ícono redondo -->
+                    </a>
+            </li>
+
+            </ul>
+        </div>
+    </div>
+  </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white text-center d-flex align-items-center justify-content-center" id="hero">
+        <div>
+            <h1 class="display-4">Gestión Inteligente de Estacionamientos</h1>
+            <p class="lead">Simplifica la administración y reserva de parqueaderos con nuestra solución completa.</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container py-5">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-calendar-check" style="font-size: 2.5rem; color: #007bff;"></i>
+                <h5 class="mt-2">Reservas Rápidas</h5>
+                <p>Haz reservas de forma ágil desde cualquier dispositivo.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-dollar-sign" style="font-size: 2.5rem; color: #007bff;"></i>
+                <h5 class="mt-2">Tarifas Flexibles</h5>
+                <p>Elige entre múltiples tarifas que se adaptan a tus necesidades.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <i class="fas fa-headset" style="font-size: 2.5rem; color: #007bff;"></i>
+                <h5 class="mt-2">Soporte 24/7</h5>
+                <p>Estamos disponibles para resolver tus dudas en cualquier momento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="container py-5" id="services">
+        <h2 class="text-center mb-4">Nuestros Servicios</h2>
+        
+        <!-- Servicio 1 -->
+        <div class="service-card" style="background-image: url('/static/img/img8.jpg');" style="color: aliceblue;">
+            <h5>Reserva de Estacionamiento</h5>
+            <p >Reserva tu espacio de estacionamiento con solo un clic, garantizando tu lugar.</p>
+        </div>
+        <div class="service-description">
+            <img src="/static/img/img9.jpg" alt="Reserva de Estacionamiento">
+            <div>
+                <h6>Descripción</h6>
+                <p>Nuestra plataforma permite realizar reservas de estacionamiento de manera rápida y sencilla. Simplemente selecciona el lugar y el horario que necesitas, y tu espacio estará reservado para ti. Además, puedes modificar o cancelar tu reserva en cualquier momento desde la aplicación.</p>
+            </div>
+        </div>
+
+        <!-- Servicio 2 -->
+        <div class="service-card" style="background-image: url('/static/img/img11.jpg');">
+            <h5>Seguridad 24/7</h5>
+            <p>Nuestros estacionamientos están monitoreados las 24 horas del día, asegurando tu vehículo.</p>
+        </div>
+        <div class="service-description">
+            <img src="/static/img/img12.jpg" alt="Seguridad 24/7">
+            <div>
+                <h6>Descripción</h6>
+                <p>Contamos con un sistema de vigilancia avanzado que opera las 24 horas del día. Nuestro personal de seguridad está altamente capacitado para brindar la protección necesaria a tu vehículo, garantizando que esté seguro mientras disfrutas de tu día.</p>
+            </div>
+        </div>
+
+        <!-- Servicio 3 -->
+        <div class="service-card" style="background-image: url('/static/img/img10.jpg');">
+            <h5>Aplicación Móvil</h5>
+            <p>Controla tus reservas y tarifas desde la comodidad de tu smartphone.</p>
+        </div>
+        <div class="service-description">
+            <img src="/static/img/img14.jpg" alt="Aplicación Móvil">
+            <div>
+                <h6>Descripción</h6>
+                <p>Nuestra aplicación móvil te permite gestionar tus reservas, consultar tarifas, y recibir notificaciones sobre disponibilidad de espacios y promociones especiales. Descarga nuestra app y lleva la gestión de tu estacionamiento en tu bolsillo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="text-center mb-4">Lo Que Dicen Nuestros Clientes</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"Autopark Solution ha facilitado mi vida. Puedo reservar mi espacio de estacionamiento desde cualquier lugar, ¡es genial!"</p>
+                        <h5>- Juan Pérez</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"Me encanta la seguridad que me brinda este servicio. Siempre me siento tranquilo sabiendo que mi auto está protegido."</p>
+                        <h5>- María Gómez</h5>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"La app es muy fácil de usar y me ha ahorrado mucho tiempo. ¡Definitivamente la recomiendo!"</p>
+                        <h5>- Carlos Rodríguez</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+    <!-- Contact Section -->
+    <section class="container py-5" id="contact">
+        <h2 class="text-center mb-4">Contáctanos</h2>
+        <form id="contactForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-contact">
+            <p>Contáctanos: +57 123 456 789</p>
+            <p>Email: contacto@autoparksolution.com</p>
+        </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook" style="width: 30px; height: 30px;"></a>
+            <a href="https://www.instagram.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" style="width: 30px; height: 30px;"></a>
+            <a href="https://www.whatsapp.com" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" style="width: 30px; height: 30px;"></a>
+        </div>
+        <p>&copy; 2024 Autopark Solution. Todos los derechos reservados.</p>
+    </footer>
+
+   <script>// Esto cerrará el menú después de hacer clic en un enlace
+    c// Esto cierra el menú cuando se hace clic en un enlace
+const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+const navbarCollapse = document.getElementById('navbarNav');
+
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 767) {
+            navbarCollapse.classList.remove('show');
+        }
+    });
+});
+
+
+    </script>
+  
+<script>
+
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevenir el envío del formulario
+
+    // Mostrar el alert de confirmación
+    Swal.fire({
+        title: '¡Mensaje Enviado!',
+        text: 'Gracias por contactarnos. Nos pondremos en contacto contigo pronto.',
+        icon: 'success',
+        confirmButtonText: 'Cerrar'
+    });
+    
+    // Limpiar los campos del formulario
+    document.getElementById("contactForm").reset();
+});
+
+</script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+</body>
+
+</html>

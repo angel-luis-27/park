@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopark Solution</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+ 
+  <style>
+    body {
+            background: url('static/img/lu.avif') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+          background-color: rgba(255, 255, 255, 0.95);
+          padding: 40px;
+          border-radius: 10px;
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+          max-width: 800px;
+          margin-top: 100px;
+
+      }
+
+      footer {
+          margin-top: 20px;
+          text-align: center;
+          font-size: 0.9rem;
+          color: #666;
+      }
+
+      #factura {
+          display: none;
+          margin-top: 40px;
+          padding: 20px;
+          background-color: white;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+      }
+
+      .image-placeholder {
+          width: 100%;
+          height: 200px; /* Ajusta la altura según sea necesario */
+          background-color: #f0f0f0; /* Color de fondo para la imagen */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 20px 0; /* Espacio superior e inferior */
+          border: 2px dashed #007bff; /* Borde de la imagen */
+          
+      }
+      .navbar {
+          background-color:transparent;
+          color: white;
+          padding: 10px;
+          border-radius: 5px;
+          margin-bottom: 20px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 1000;
+          box-shadow: 0 4px 6px rgba(63, 63, 63, 0.1);
+      }
+       .navbar-brand img {
+          height: 40px;
+          margin-right: 10px;
+          border-radius: 30px;
+      }
+
+
+      
+      .navbar {
+        background-color:transparent;
+        padding: 10px 20px;
+        border-radius: 10px;
+    }
+
+    .navbar-brand img {
+        width: 100px;
+    }
+
+    
+
+    .navbar-nav .nav-link:hover {
+        background-color: rgba(231, 12, 12, 0.7);
+        color: white;
+        border-radius: 24px;
+    }
+
+
+/* Estilo para la sidebar */
+.sidebar {
+  background-image: url('static/img/img6.jpg'); /* Ruta de tu imagen */
+  background-size: cover; /* La imagen cubre todo el área */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+/* Estilo de los menús desplegables */
+.menu-toggle {
+  display: none; /* Oculta el checkbox */
+}
+
+.nav-item .nav-treeview {
+  display: none; /* Oculta los submenús por defecto */
+}
+
+.menu-toggle:checked + .nav-treeview {
+  display: block; /* Muestra el submenú cuando el checkbox está marcado */
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-item label {
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Transición para hacer más suave el despliegue y ocultamiento */
+.nav-treeview {
+  transition: all 0.3s ease;
+}
+
+
+/* Estilo de los menús desplegables */
+.menu-toggle {
+  display: none; /* Oculta el checkbox */
+}
+
+.nav-item .nav-treeview {
+  display: none; /* Oculta los submenús por defecto */
+}
+
+.menu-toggle:checked + .nav-treeview {
+  display: block; /* Muestra el submenú cuando el checkbox está marcado */
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.nav-item label {
+  display: block;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Transición para hacer más suave el despliegue y ocultamiento */
+.nav-treeview {
+  transition: all 0.3s ease;
+}
+
+/* Estilo de los textos de la barra lateral */
+.sidebar {
+  color: white; /* Cambia el color del texto de toda la sidebar */
+}
+
+/* Cambia el color del texto de los links */
+.sidebar .nav-link {
+  color: white; /* Letras blancas en los enlaces */
+}
+
+/* Cambia el color del texto cuando el mouse está sobre un enlace */
+.sidebar .nav-link:hover {
+  color: #f8f9fa; /* Puedes cambiar el color a uno más claro si prefieres */
+}
+
+/* Cambia el color de los iconos en los enlaces */
+.sidebar .nav-link i {
+  color: white; /* Iconos blancos */
+}
+
+/* Cambia el color de los títulos del menú */
+.sidebar .nav-header {
+  color: white; /* Letras blancas en los encabezados de las secciones */
+}
+
+/* Cambiar el color de los badges (como las etiquetas que aparecen en algunos enlaces) */
+.sidebar .badge {
+  background-color: #f00; /* Un color de fondo para los badges */
+  color: white; /* Letras blancas dentro de los badges */
+}
+
+/* Color del texto en las subopciones del menú (los desplegables) */
+.sidebar .nav-treeview .nav-link {
+  color: white; /* Letras blancas en las opciones de los submenús */
+}
+
+/* Opcional: cambiar el color del texto en los títulos de los submenús */
+.sidebar .nav-treeview > .nav-item > a {
+  color: white; /* Letras blancas en los títulos de las opciones dentro del submenú */
+}
+
+/* Estilo del menú lateral */
+.sidebar {
+  overflow-y: auto; /* Permite el desplazamiento vertical cuando el contenido se desborda */
+  height: 100vh; /* Asegura que el menú ocupe toda la altura de la ventana */
+  scrollbar-width: thin; /* Barra de desplazamiento más delgada en Firefox */
+  scrollbar-color: #ffffff #212529; /* Pulgar blanco con fondo oscuro */
+}
+
+/* Estilo de la barra de desplazamiento en navegadores basados en Webkit (Chrome, Safari, etc.) */
+.sidebar::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilo del pulgar (parte movible) de la barra de desplazamiento */
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Pulgar blanco */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 3px solid #212529; /* Borde oscuro alrededor del pulgar */
+  transition: background-color 0.3s ease; /* Efecto de transición cuando cambia el color */
+}
+
+/* Fondo de la barra de desplazamiento */
+.sidebar::-webkit-scrollbar-track {
+  background: #212529; /* Fondo oscuro para la barra */
+  border-radius: 10px; /* Bordes redondeados para el fondo */
+}
+
+/* Estilo cuando el pulgar de la barra de desplazamiento es tocado (hover) */
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: #f8f9fa; /* Pulgar blanco más claro cuando se pasa el mouse */
+}
+
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Barra de navegación con fondo transparente */
+.barra {
+    background-color: transparent;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los elementos de la barra de navegación */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Separación entre los elementos del menú */
+nav ul li {
+    margin-right: 15px;
+}
+
+/* Estilos para los enlaces */
+nav ul li a {
+    text-decoration: none;
+    color: #f8f2f2; /* Color blanco */
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilo específico para el botón de "Menú Principal" */
+nav ul li .btn-menu {
+    border-radius: 5px;
+}
+
+nav ul li .btn-menu:hover {
+    background-color: rgb(170, 24, 24);
+    color: white;
+}
+
+/* Estilo específico para el botón de "Usuario" */
+nav ul li .btn-usuario {
+    border-radius: 5px;
+}
+
+nav ul li .btn-usuario:hover {
+    background-color: rgb(140, 28, 28);
+    color: white;
+}
+
+/* Espacio entre el icono y el texto */
+nav ul li a i {
+    margin-right: 20px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+      padding: 30px; /* Ajusta el padding para pantallas más pequeñas */
+      margin-top: 50px; /* Menos espacio arriba en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+      padding: 20px; /* Menos padding para pantallas medianas */
+      margin-top: 30px; /* Menos espacio arriba */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+      padding: 15px; /* Aún menos padding en pantallas pequeñas */
+      margin-top: 20px; /* Menos espacio en pantallas móviles */
+      max-width: 85%; /* Asegura que el contenedor ocupe todo el ancho */
+  }
+}
+
+
+
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 900px; /* Max width para el formulario */
+    margin-top: 80px; /* Espacio superior por defecto */
+}
+
+h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.form-control {
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    font-size: 1.1rem;
+    padding: 12px;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+footer {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 30px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25);
+}
+
+.mb-3 {
+    margin-bottom: 20px;
+}
+
+.notification {
+    display: none;
+    margin-top: 20px;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 120px; /* Más espacio en dispositivos móviles */
+    }
+
+    h2 {
+        font-size: 1.5rem; /* Ajustar tamaño del encabezado en pantallas pequeñas */
+    }
+
+    .btn-secondary {
+        font-size: 1rem; /* Ajustar tamaño del botón en pantallas pequeñas */
+    }
+}
+
+
+
+
+.content {
+  margin-top: 200px; /* Incrementa este valor para moverlo más abajo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+        
+  </style>
+
+
+</head>
+<body    class="hold-transition sidebar-mini layout-fixed navbar-warning">
+    <div class="wrapper ">
+
+
+
+ 
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-success navbar-light barra" style="width: 80%; height: 50px;">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: rgb(246, 246, 246);"></i></a>
+          </li>
+          
+          <!-- Nombre del sistema (visible en pantallas grandes) -->
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" onclick="reporte()" class="nav-link" style="color: rgb(246, 246, 246);"><h5>Autopark Solution</h5></a>
+          </li>
+          
+          <!-- Botón de tareas -->
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="#" onclick="tareas()" class="nav-link" alt="Asignar Tareas" style="color: rgb(246, 246, 246);">
+              <i class="nav-icon fa-solid fa-square-plus"></i>
+            </a>
+          </li>
+        </ul>
+      
+        <!-- Navbar Right links (iconos y botones en la parte derecha) -->
+        <ul class="navbar-nav ml-auto">
+          <!-- Botón Menú Principal (visible en pantallas grandes) -->
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="index.html" class="nav-link btn-menu" alt="Menú Principal" style="color: white;">
+              Menú Principal
+            </a>
+          </li>
+      
+          <!-- Botón Usuario (visible en pantallas grandes) -->
+          <li class="nav-item d-none d-sm-inline-block">
+            <a href="emplieadoint.html" class="nav-link btn-usuario" alt="Usuario" style="color: rgb(246, 246, 246);">
+              oprario
+            </a>
+          </li>
+      
+          <!-- Botón Menú Principal (Icono, visible en pantallas pequeñas) -->
+          <li class="nav-item d-sm-none">
+            <a href="index.html" class="nav-link" alt="Menú Principal">
+              <i class="fa-solid fa-home" style="font-size: 20px; color: rgb(0, 0, 0);"></i>
+            </a>
+          </li>
+      
+          <!-- Botón Usuario (Icono, visible en pantallas pequeñas) -->
+          <li class="nav-item d-sm-none">
+            <a href="emplieadoint.html" class="nav-link" alt="Usuario">
+              <i class="fa-solid fa-user" style="font-size: 20px; color: rgb(240, 3, 3);"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+
+   
+      <aside class="main-sidebar sidebar-dark-primary elevation-4" >
+        <!-- Brand Logo -->
+        <a href="index.html" class="brand-link">
+          <img src="/static/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+          <span class="brand-text font-weight-light">MENU</span>
+        </a>
+      
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="static/img/usuari.png"  class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+              <a href="perfiladmin.html" class="d-block">Perfil</a>
+            </div>
+          </div>
+      
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              
+              <!-- Visión general -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link active">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <p>
+                    Visión general
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                
+                <!-- Contenedor para el checkbox -->
+                <input type="checkbox" id="menu-toggle" class="menu-toggle" style="display: none;">
+                <label for="menu-toggle" class="nav-link">
+                  <i class="right fas fa-angle-left"></i> <!-- Icono para alternar -->
+                </label>
+      
+                <ul class="nav nav-treeview" id="submenu">
+                  <li class="nav-item">
+                    <a href="reservaadmin.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Reservas actuales y pasadas</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="estadistica.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Estadísticas de ocupación tiempo real</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="ingresos.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Ingresos generados</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="alertas.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Alertas sobre las reservas o problemas técnicos</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+      
+              <!-- Gestión de reservas -->
+              <li class="nav-item">
+                <a href="gestionreserva.html" class="nav-link">
+                  <i class="fas fa-calendar-check"></i>
+                  <p>Gestión de reservas <span class="right badge badge-danger">New</span></p>
+                </a>
+              </li>
+      
+              <!-- Gestión de usuarios -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-users-cog"></i>
+                  <p>
+                    Gestión de usuarios
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="admistrarusuari.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Administrar usuarios</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="hisoreserva.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Historial de reservas</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="gestionpago.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Gestión de pagos</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+      
+              <!-- Configuración -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-cogs"></i>
+                  <p>
+                    Configuración
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="actuaizartarifa.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Actualizar tarifas</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="promociones.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Gestionar promociones</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+      
+              <!-- Estadísticas y reportes -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-chart-line"></i>
+                  <p>
+                    Estadísticas y reportes
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="generareporte.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Generar reportes</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="actualizardatos.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Actualizar datos</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+      
+              <!-- Alertas y notificaciones -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <p>
+                    Alertas y notificaciones
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="notifi.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Envío de notificación usuario</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="Alertasproblemas.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Alertas de problemas</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+      
+              <!-- Seguridad -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-file-alt"></i>
+                  <p>
+                    Configuración y alertas
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="alertasvehiculos.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Alertas vehiculares</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-book"></i>
+                  <p>
+                    Configuración y alertas
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="accesoauditoria.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Auditoría de acceso</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+      
+              <!-- Soportes y ayuda -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-question-circle"></i>
+                  <p>
+                    Soportes y ayuda
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="atencionalciente..html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Atención al cliente</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+      
+              <!-- Mejora continua -->
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-history"></i>
+                  <p>
+                    Mejora continua
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="historicalperfo.html" class="nav-link">
+                      <i class="fas fa-check"></i>
+                      <p>Historial de desempeño</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+      
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>
+      
+      
+
+      <div  class="content-wrapper" style="background-color: rgba(240, 237, 237, 0);"> 
+    
+
+     
+
+    <!-- Contenido: Editar Perfil -->
+    <div class="content d-flex justify-content-center align-items-center mt-5">
+        <div class="card">
+            <h3 class="text-center mb-3">Editar Perfil</h3>
+            <form id="editarPerfilForm">
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre" value="Juan Pérez" required>
+                <input type="email" class="form-control" id="correo" placeholder="Correo Electrónico" value="juan.perez@email.com" required>
+                <input type="password" class="form-control" id="password" placeholder="Nueva Contraseña">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar Contraseña">
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" onclick="volver()">Cancelar</button>
+                    <button hretf="edito.html" type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        document.getElementById('editarPerfilForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Cambios guardados con éxito.');
+            window.location.href = 'perfil-usuario.html';
+        });
+
+        function volver() {
+            window.location.href = 'perfil-usuario.html';
+        }
+    </script>
+
+</body>
+</html>

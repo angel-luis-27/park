@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopark Solution</title>
+     <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+   <!-- Font Awesome -->
+   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+   <!-- Google Font: Source Sans Pro -->
+   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <!-- Font Awesome -->
+ <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+ <!-- Ionicons -->
+ <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+ <!-- Tempusdominus Bbootstrap 4 -->
+ <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+ <!-- iCheck -->
+ <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+ <!-- JQVMap -->
+ <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+ <!-- Theme style -->
+ <link rel="stylesheet" href="dist/css/adminlte.min.css">
+ <!-- overlayScrollbars -->
+ <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+ <!-- Daterange picker -->
+ <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+ <!-- summernote -->
+ <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+ <!-- Google Font: Source Sans Pro -->
+ <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+ 
+
+ <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: url('static/img/img11.jpg') no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 400px; /* Ancho fijo */
+        max-width: 90%; /* Responsivo */
+        max-height: 90%; /* Asegurar que no exceda el viewport */
+        overflow-y: auto; /* Scroll interno si es necesario */
+        margin: 20px 0; /* Evitar que quede pegado al borde superior */
+    }
+
+    h2 {
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+    .tab {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .tab button {
+        width: 48%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    .tab button.active {
+        background-color: #0056b3;
+    }
+
+    .form-container {
+        display: none;
+    }
+
+    .form-container.active {
+        display: block;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    form input {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    form button {
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    form button:hover {
+        background-color: #218838;
+    }
+
+    .menu-button {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .menu-button a {
+        text-decoration: none;
+        color: white;
+        background-color: #007bff;
+        padding: 10px 20px;
+        border-radius: 4px;
+        display: inline-block;
+    }
+
+    .menu-button a:hover {
+        background-color: #0056b3;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+        .container {
+            width: 100%;
+            max-height: 95%; /* Asegurar visibilidad */
+            margin: 10px;
+        }
+
+        .tab button {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+    <div class="container">
+        <h2>Bienvenido</h2>
+        <div class="tab">
+            <button id="registroTab" class="active" onclick="mostrarFormulario('registro')">Registro</button>
+            <button id="loginTab" onclick="mostrarFormulario('login')">Inicio de Sesión</button>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div id="registro" class="form-container active">
+            <form action="/registro" method="POST">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" required>
+
+                <label for="usuario">Nombre de Usuario</label>
+                <input type="text" id="usuario" name="usuario" required>
+
+                <label for="contraseña">Contraseña</label>
+                <input type="password" id="contraseña" name="contraseña" required>
+
+                <label for="confirmar-contraseña">Confirmar Contraseña</label>
+                <input type="password" id="confirmar-contraseña" name="confirmar-contraseña" required>
+
+                <button type="submit">Registrar</button>
+            </form>
+
+            <!-- Botón para volver al menú principal -->
+            <div class="menu-button">
+                <a href="index.html">Volver al Menú Principal</a>
+            </div>
+        </div>
+        
+
+        <!-- Formulario de Inicio de Sesión -->
+        <div id="login" class="form-container">
+            <form action="/login" method="POST">
+                <label for="usuario">Nombre de Usuario</label>
+                <input type="text" id="usuario" name="usuario" required>
+
+                <label for="contraseña">Contraseña</label>
+                <input type="password" id="contraseña" name="contraseña" required>
+
+                <button type="submit" >Iniciar Sesión</button>
+            </form>
+
+            <!-- Botón para volver al menú principal -->
+            <div class="menu-button">
+                <a href="/menu-principal">Volver al Menú Principal</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function mostrarFormulario(formulario) {
+            // Ocultar todos los formularios
+            document.getElementById('registro').classList.remove('active');
+            document.getElementById('login').classList.remove('active');
+
+            // Mostrar el formulario seleccionado
+            document.getElementById(formulario).classList.add('active');
+
+            // Cambiar la clase de los botones
+            document.getElementById('registroTab').classList.remove('active');
+            document.getElementById('loginTab').classList.remove('active');
+
+            if (formulario === 'registro') {
+                document.getElementById('registroTab').classList.add('active');
+            } else {
+                document.getElementById('loginTab').classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>

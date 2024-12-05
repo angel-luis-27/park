@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Calendario de Tareas</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+}
+
+#calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-top: 20px;
+}
+
+.dia {
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: relative;
+    height: 100px;
+}
+
+.marcar {
+    background-color: lightgreen;
+}
+
+.tarea {
+    background-color: lightblue;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+</style>
+<body>
+    <h1>Calendario de Tareas</h1>
+    <input type="date" id="fecha" />
+    <input type="time" id="hora" />
+    <input type="text" id="tarea" placeholder="Descripción de la tarea" />
+    <button id="agregarTarea">Agregar Tarea</button>
+
+    <div id="calendario"></div>
+
+<script src="script.js">
+    document.getElementById('agregarTarea').addEventListener('click', function() {
+        const fechaInput = document.getElementById('fecha').value;
+        const horaInput = document.getElementById('hora').value;
+        const tareaInput = document.getElementById('tarea').value;
+    
+        if (!fechaInput || !horaInput || !tareaInput) {
+            alert('Por favor, completa todos los campos.');
+            return;
+        }
+    
+        const fecha = new Date(fechaInput + 'T' + horaInput);
+        const dia = fecha.getDate();
+        const mes = fecha.getMonth();
+        const anio = fecha.getFullYear();
+    
+        agregarTareaAlCalendario(dia, mes, anio, tareaInput);
+        marcarDia(dia, mes, anio);
+    });
+    
+    function agregarTareaAlCalendario(dia, mes, anio, tarea) {
+        const calendario = document.getElementById('calendario');
+        const diaDiv = document.querySelector(`.dia[data-dia="${dia}"][data-mes="${mes}"][data-anio="${anio}"]`);
+        if (diaDiv) {
+            const tareaDiv = document.createElement('div');
+            tareaDiv.className = 'tarea';
+            tareaDiv.innerText = `${tarea} - ${new Date(anio, mes, dia).toLocaleString('es-ES', { hour: '2-digit', minute: '2-digit' })}`;
+            diaDiv.appendChild(tareaDiv);
+        }
+    }
+    
+    function marcarDia(dia, mes, anio) {
+        const calendario = document.getElementById('calendario');
+        const diaDiv = document.querySelector(`.dia[data-dia="${dia}"][data-mes="${mes}"][data-anio="${anio}"]`);
+        if (diaDiv) {
+            diaDiv.classList.add('marcar');
+        }
+    }
+    
+    // Generar el calendario (simple ejemplo del mes actual)
+    function generarCalendario() {
+        const calendario = document.getElementById('calendario');
+        const fecha = new Date();
+        const mes = fecha.getMonth();
+        const anio = fecha.getFullYear();
+    
+        const diasEnMes = new Date(anio, mes + 1, 0).getDate();
+        for (let dia = 1; dia <= diasEnMes; dia++) {
+            const diaDiv = document.createElement('div');
+            diaDiv.className = 'dia';
+            diaDiv.setAttribute('data-dia', dia);
+            diaDiv.setAttribute('data-mes', mes);
+            diaDiv.setAttribute('data-anio', anio);
+            diaDiv.innerText = dia;
+            calendario.appendChild(diaDiv);
+        }
+    }
+    
+    generarCalendario();
+ </script>
+    
+</body>
+</html>

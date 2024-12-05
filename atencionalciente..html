@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopark Solution</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+
+ 
+
+<style>
+  body {
+      background-color: #f8f9fa;
+      background: url('/static/img/lu.avif') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+  }
+
+  .navbar {
+      background-color:transparent;
+      padding: 10px 20px;
+      border-radius: 10px;
+  }
+
+  .navbar-brand img {
+      width: 100px;
+  }
+
+  
+
+  .navbar-nav .nav-link:hover {
+      background-color: rgba(231, 12, 12, 0.7);
+      color: white;
+      border-radius: 24px;
+  }
+
+
+
+  .header {
+      background-color: #343a40;
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      margin: 20px auto;
+      width: 90%;
+  }
+
+  .container {
+      margin-top: 20px;
+  }
+
+  .alert-card {
+      margin: 20px auto;
+      width: 90%;
+      border-radius: 15px;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .alert-card h4 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      color: #343a40;
+  }
+
+  .alert {
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
+
+  .alert-reserva {
+      background-color: #17a2b8;
+      color: white;
+  }
+
+  .alert-tecnico {
+      background-color: #dc3545;
+      color: white;
+  }
+
+  .alert strong {
+      font-size: 1.1rem;
+  }
+
+  .alert-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+  }
+
+  .alert-body {
+      display: flex;
+      align-items: center;
+  }
+
+  .alert-time {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+  }
+
+
+  @media (min-width: 768px) {
+      .header {
+          width: 60%;
+      }
+
+      .alert-card {
+          width: 60%;
+      }
+  }
+  .main-sidebar {
+      background: url('/static/img/img6.jpg') no-repeat center center;
+      background-size: cover;
+    }
+
+
+
+
+
+
+
+
+    /* Estilo personalizado para el contenedor */
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Título del formulario */
+  .container h2 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 24px;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+  }
+
+  /* Estilo para etiquetas */
+  .form-label {
+      font-weight: bold;
+      color: #555;
+  }
+
+  /* Inputs */
+  .form-control {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+  }
+
+  /* Inputs con foco */
+  .form-control:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+  }
+
+  /* Botón */
+  .btn {
+      background-color: #007bff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      color: white;
+      transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+      background-color: #0056b3;
+  }
+
+  /* Footer */
+  footer {
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin-top: 20px;
+  }
+
+
+  .navbar {
+    background-color:transparent;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(63, 63, 63, 0.1);
+}
+ .navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 30px;
+}
+
+</style>
+
+
+
+</head>
+<body   class="hold-transition sidebar-mini layout-fixed navbar-warning">
+  <div class="wrapper ">
+    
+    
+ <!-- loading -->
+ <div class="preloader flex-column justify-content-center align-items-center">
+  <div class="preloader-animation">
+      <img src="static/img/logo.png" alt="AdminLTELogo" class="preloader-logo">
+      <div class="spinner"></div>
+  </div>
+</div>
+
+
+ <!-- Navbar -->
+ <nav class="main-header navbar navbar-expand navbar-success navbar-light barra" style="width: 80%; height: 50px;">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color: rgb(246, 246, 246);"></i></a>
+    </li>
+    
+    <!-- Nombre del sistema (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" onclick="reporte()" class="nav-link" style="color: rgb(246, 246, 246);"><h5>Autopark Solution</h5></a>
+    </li>
+    
+    <!-- Botón de tareas -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" onclick="tareas()" class="nav-link" alt="Asignar Tareas" style="color: rgb(246, 246, 246);">
+        <i class="nav-icon fa-solid fa-square-plus"></i>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Navbar Right links (iconos y botones en la parte derecha) -->
+  <ul class="navbar-nav ml-auto">
+    <!-- Botón Menú Principal (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="index.html" class="nav-link btn-menu" alt="Menú Principal" style="color: white;">
+        Menú Principal
+      </a>
+    </li>
+
+    <!-- Botón Usuario (visible en pantallas grandes) -->
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="emplieadoint.html" class="nav-link btn-usuario" alt="Usuario" style="color: rgb(246, 246, 246);">
+       operario
+      </a>
+    </li>
+
+    <!-- Botón Menú Principal (Icono, visible en pantallas pequeñas) -->
+    <li class="nav-item d-sm-none">
+      <a href="index.html" class="nav-link" alt="Menú Principal">
+        <i class="fa-solid fa-home" style="font-size: 20px; color: rgb(0, 0, 0);"></i>
+      </a>
+    </li>
+
+    <!-- Botón Usuario (Icono, visible en pantallas pequeñas) -->
+    <li class="nav-item d-sm-none">
+      <a href="emplieadoint.html" class="nav-link" alt="Usuario">
+        <i class="fa-solid fa-user" style="font-size: 20px; color: rgb(240, 3, 3);"></i>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4" >
+  <!-- Brand Logo -->
+  <a href="index.html" class="brand-link">
+    <img src="/static/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">MENU</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="static/img/usuari.png"  class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="perfiladmin.html" class="d-block">Perfil</a>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        
+        <!-- Visión general -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link active">
+            <i class="fas fa-tachometer-alt"></i>
+            <p>
+              Visión general
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          
+          <!-- Contenedor para el checkbox -->
+          <input type="checkbox" id="menu-toggle" class="menu-toggle" style="display: none;">
+          <label for="menu-toggle" class="nav-link">
+            <i class="right fas fa-angle-left"></i> <!-- Icono para alternar -->
+          </label>
+
+          <ul class="nav nav-treeview" id="submenu">
+            <li class="nav-item">
+              <a href="reservaadmin.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Reservas actuales y pasadas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="estadistica.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Estadísticas de ocupación tiempo real</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="ingresos.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Ingresos generados</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="alertas.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Alertas sobre las reservas o problemas técnicos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Gestión de reservas -->
+        <li class="nav-item">
+          <a href="gestionreserva.html" class="nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <p>Gestión de reservas <span class="right badge badge-danger">New</span></p>
+          </a>
+        </li>
+
+        <!-- Gestión de usuarios -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-users-cog"></i>
+            <p>
+              Gestión de usuarios
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="admistrarusuari.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Administrar usuarios</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="hisoreserva.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Historial de reservas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="gestionpago.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Gestión de pagos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Configuración -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-cogs"></i>
+            <p>
+              Configuración
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="actuaizartarifa.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Actualizar tarifas</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="promociones.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Gestionar promociones</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Estadísticas y reportes -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-chart-line"></i>
+            <p>
+              Estadísticas y reportes
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="generareporte.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Generar reportes</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="actualizardatos.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Actualizar datos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Alertas y notificaciones -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>
+              Alertas y notificaciones
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="notifi.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Envío de notificación usuario</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="Alertasproblemas.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Alertas de problemas</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Seguridad -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-file-alt"></i>
+            <p>
+              Configuración y alertas
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="alertasvehiculos.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Alertas vehiculares</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-book"></i>
+            <p>
+              Configuración y alertas
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="accesoauditoria.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Auditoría de acceso</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Soportes y ayuda -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-question-circle"></i>
+            <p>
+              Soportes y ayuda
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="atencionalciente..html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Atención al cliente</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Mejora continua -->
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="fas fa-history"></i>
+            <p>
+              Mejora continua
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="historicalperfo.html" class="nav-link">
+                <i class="fas fa-check"></i>
+                <p>Historial de desempeño</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+
+
+  <div class="content-wrapper" style="background-color: rgba(240, 237, 237, 0);">
+
+
+
+    
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Atención al Cliente y Resolución de Problemas</h2>
+
+  <form id="customerSupportForm">
+      <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
+      </div>
+      <div class="mb-3">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <input type="email" class="form-control" id="email" placeholder="Tu correo electrónico" required>
+      </div>
+      <div class="mb-3">
+          <label for="problema" class="form-label">Descripción del Problema</label>
+          <textarea class="form-control" id="problema" rows="4" placeholder="Describe tu problema o consulta..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Enviar Consulta</button>
+  </form>
+
+  <footer class="text-center mt-4">
+      © 2024 Autopark Solution. Todos los derechos reservados.
+  </footer>
+</div>
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/static/js/atencionalciente.js"></script>
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+</body>
+</html>
